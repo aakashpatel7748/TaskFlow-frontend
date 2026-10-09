@@ -1,26 +1,715 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:where(.dark, .dark *, [data-bs-theme="dark"], [data-bs-theme="dark"] *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Dark Theme Variables (Default) */
+:root,
+:root[data-bs-theme="dark"],
+.dark {
+  --color-primary: #2b2c47;
+  --color-primary-light: #353456;
+  --color-primary-dark: #25253d;
+  --color-secondary: #c7c4e9;
+  --color-secondary-dark: #9e9ad1;
+  --color-secondary-light: #393b5f;
+  --color-tertiary: #36abf9;
+  --color-tertiary-opaque: #36abf933;
+  --color-tertiary-light: #3498db;
+  --color-grey-light-1: #faf9f9;
+  --color-grey-light-2: #f4f2f2;
+  --color-grey-light-3: #f0eeee;
+  --color-grey-light-4: #ccc;
+  --color-grey-dark-1: #333;
+  --color-grey-dark-2: #777;
+  --color-grey-dark-3: #999;
+  --color-grey-dark-4: #525270;
+  --color-cyan: #1abc9c;
+  --color-cyan-opaque: #1abc9c33;
+  --color-success: #2ecc71;
+  --color-error: #e74c3c;
+  --color-remaining: #87ceeb;
+  --color-error-opaque: #e74c3caa;
+  --color-red: #ff3a3a;
+  --color-yellow: #f1c40f;
+  --color-yellow-dark: #e67e22;
+  --color-white: #fff;
+  --color-black: #000;
+  --line: 1px solid var(--color-primary-dark);
+  --color-table-body: #2B2C47;
+
+  /* new variables */
+  --border: #1a73e8;
+  --icon-primary: #c7c4e9;
+  --color-blue: #36abf9;
+  --color-blue-opaque: #36abf933;
+  --color-success-dark: #198754;
+  --color-progress: #353456;
+  --color-grey: #777;
+  --color-stroke: rgba(255, 255, 255, 0.19);
+  --color-grey-light: #faf9f9;
+  --color-orange: #FFA500;
+
+  /* Mappings */
+  --background: #25253d;
+  --foreground: #c7c4e9;
+  --card: #353456;
+  --card-foreground: #ffffff;
+  --sidebar: #353456;
+  --sidebar-foreground: #c7c4e9;
+  --popover: #353456;
+  --popover-foreground: #ffffff;
+  --muted: #2b2c47;
+  --muted-foreground: #9e9ad1;
+  --destructive: #e74c3c;
+  --destructive-foreground: #ffffff;
+  --accent: #353456;
+  --accent-foreground: #ffffff;
+  --ring: #36abf9;
+}
+
+/* Light Theme Variables */
+:root[data-bs-theme="light"],
+.light {
+  --color-primary: #f6f8fa;
+  --color-primary-light: #ffffff;
+  --color-primary-dark: #eceff3;
+
+  --color-secondary: #262626;
+  --color-secondary-dark: #3d3d3d;
+  --color-secondary-light: #e4e6e8;
+  --color-tertiary: #d3e3fd;
+  --color-tertiary-light: #4285f4;
+  --color-tertiary-opaque: #1a73e81a;
+  --color-grey-light-1: #171717;
+  --color-grey-light-2: #e8eaed;
+  --color-grey-light-3: #dadce0;
+  --color-grey-light-4: #333;
+  --color-grey-dark-1: #5f6368;
+  --color-grey-dark-2: #3c4043;
+  --color-grey-dark-3: #202124;
+  --color-grey-dark-4: #171717;
+  --color-cyan: #1abc9c;
+  --color-cyan-opaque: #1abc9c33;
+  --color-success: #35a152;
+  --color-error: #d93025;
+  --color-error-opaque: #dd2d2089;
+  --color-red: #ea4335;
+  --color-yellow: #fbbc04;
+  --color-yellow-dark: #e37400;
+  --color-remaining: #a0c3ff;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --line: 1px solid var(--color-grey-light-3);
+  --color-table-body: #F6F8FA;
+
+  /* new variables */
+  --border: #5e95ecc8;
+  --icon-primary: #1967d2;
+  --color-blue: #36abf9;
+  --color-blue-opaque: #36abf933;
+  --color-success-dark: #198754;
+  --color-progress: #89D0EE;
+  --color-grey: #777;
+  --color-stroke: rgba(0, 0, 0, 0.118);
+  --color-grey-light: #faf9f9;
+  --color-orange: #FFA500;
+
+  /* Mappings */
+  --background: #f6f8fa;
+  --foreground: #262626;
+  --card: #ffffff;
+  --card-foreground: #262626;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #262626;
+  --popover: #ffffff;
+  --popover-foreground: #262626;
+  --muted: #f1f5f9;
+  --muted-foreground: #5f6368;
+  --destructive: #d93025;
+  --destructive-foreground: #ffffff;
+  --accent: #e4e6e8;
+  --accent-foreground: #262626;
+  --ring: #1a73e8;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
 }
 
-body {
-  background: var(--background);
+/* Background colors */
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-primary-light {
+  background-color: var(--color-primary-light);
+}
+
+.bg-primary-dark {
+  background-color: var(--color-primary-dark);
+}
+
+.bg-color-table-body {
+  background-color: var(--color-table-body);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+
+.bg-tertiary {
+  background-color: var(--color-tertiary);
+}
+
+.bg-white {
+  background-color: var(--color-white);
+}
+
+.bg-error {
+  background-color: var(--color-error);
+}
+
+/* Text colors */
+.txt-primary {
+  color: var(--color-primary);
+}
+
+.txt-secondary {
+  color: var(--color-secondary);
+}
+
+.txt-secondary-dark {
+  color: var(--color-secondary-dark);
+}
+
+.txt-grey {
+  color: var(--color-grey-dark-1);
+}
+
+.txt-tertiary {
+  color: var(--color-tertiary);
+}
+
+.txt-tertiary-light {
+  color: var(--color-tertiary-light);
+}
+
+.txt-success {
+  color: var(--color-success);
+}
+
+.txt-error {
+  color: var(--color-error);
+}
+
+.txt-icon {
+  color: var(--icon-primary);
+}
+
+.txt-grey-light {
+  color: var(--color-grey-light-1);
+}
+
+.txt-grey-light-4 {
+  color: var(--color-grey-light-4);
+}
+
+/* Border colors */
+.border-line {
+  border: var(--line);
+}
+
+.border-primary {
+  border: 1px solid var(--color-primary-dark);
+}
+
+.border-error {
+  border: 1px solid var(--color-error);
+}
+
+/* Padding / Margin */
+.p-1 {
+  padding: 0.25rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.m-1 {
+  margin: 0.25rem;
+}
+
+.m-2 {
+  margin: 0.5rem;
+}
+
+.m-4 {
+  margin: 1rem;
+}
+
+/* Typography */
+.fs-sm {
+  font-size: 0.875rem;
+}
+
+.fs-md {
+  font-size: 1rem;
+}
+
+.fs-lg {
+  font-size: 1.25rem;
+}
+
+.fw-bold {
+  font-weight: bold;
+}
+
+.fw-medium {
+  font-weight: 500;
+}
+
+.fw-normal {
+  font-weight: normal;
+}
+
+/* Rounded / Shadow */
+.rounded {
+  border-radius: 0.5rem;
+}
+
+.rounded-sm {
+  border-radius: 0.25rem;
+}
+
+.shadow-sm {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.shadow-md {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-lg {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.shadow-white {
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* Button base */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary {
+  background-color: var(--color-tertiary);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-tertiary-light);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid var(--color-tertiary);
+  color: var(--color-tertiary);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-tertiary-opaque);
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.w-1 {
+  width: 0.5rem;
+}
+
+.w-2 {
+  width: 1rem;
+}
+
+.w-3 {
+  width: 1.5rem;
+}
+
+.w-4 {
+  width: 2rem;
+}
+
+.h-1 {
+  height: 0.5rem;
+}
+
+.h-2 {
+  height: 1rem;
+}
+
+.h-3 {
+  height: 1.5rem;
+}
+
+.h-4 {
+  height: 2rem;
+}
+
+/* Custom Sleek Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 9999px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}
+
+/* Glassmorphism effects */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.dark .glass-panel {
+  background: rgba(43, 44, 71, 0.85);
+  border: 1px solid var(--color-stroke);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.dark .glass-card {
+  background: rgba(53, 52, 86, 0.5);
+  border: 1px solid var(--color-stroke);
+}
+
+.glass-card:hover {
+  background: rgba(241, 245, 249, 0.9);
+  border-color: var(--color-tertiary);
+}
+
+.dark .glass-card:hover {
+  background: rgba(53, 52, 86, 0.8);
+  border-color: var(--color-tertiary);
+}
+
+
+/* ==========================================================================
+   REUSABLE INPUT & SELECT SYSTEM (100% CSS Variable Powered)
+   Supports seamless Dark Mode & Light Mode theme switching
+   ========================================================================== */
+
+/* Input Wrapper Group */
+.input-group,
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  width: 100%;
+  margin-bottom: 0.75rem;
+}
+
+/* Input Label Style */
+.input-label,
+.input-lable {
+  display: block;
+  font-size: 0.75rem;
+  /* 12px */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-secondary-dark, var(--foreground));
+  margin-left: 0.15rem;
+  user-select: none;
+}
+
+/* Red Asterisk for Required Fields */
+.input-label .required,
+.input-label .asterisk,
+.input-lable .required,
+.input-lable .asterisk {
+  color: var(--color-error, #ef4444);
+  margin-left: 0.25rem;
+  font-weight: 700;
+}
+
+/* Main Input & Select Box Style (Uses theme CSS variables) */
+.input-box,
+.input-field,
+.custom-input,
+.input,
+.select-box,
+.custom-select,
+.select {
+  width: 90%;
+  height: 2.75rem;
+  /* 44px */
+  padding: 0.625rem 1rem;
+  border-radius: 0.5rem;
+  /* 8px */
+  background-color: var(--color-primary-light);
+  border: 1px solid var(--color-stroke);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Specific styling for <select> dropdown arrow & options */
+select.input-box,
+select.input-field,
+select.custom-input,
+select.input,
+select.select-box,
+select.custom-select,
+select.select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239e9ad1'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.875rem center;
+  background-size: 1.1rem;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+/* Dropdown <option> elements styling */
+select.input-box option,
+select.input-field option,
+select.custom-input option,
+select.input option,
+select.select-box option,
+select.custom-select option,
+select.select option {
+  background-color: var(--color-primary);
+  border: none;
+  color: var(--color-secondary);
+  padding: 1rem 2rem;
+  width: 100%;
+}
+
+/* Placeholder Styling */
+.input-box::placeholder,
+.input-field::placeholder,
+.custom-input::placeholder,
+.input::placeholder {
+  color: var(--color-secondary-dark);
+  opacity: 0.7;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+/* Hover State
+.input-box:hover,
+.input-field:hover,
+.custom-input:hover,
+.input:hover,
+.select-box:hover,
+.custom-select:hover,
+.select:hover {
+  border-color: var(--color-tertiary);
+} */
+
+/* Focus State */
+/* .input-box:focus,
+.input-field:focus,
+.custom-input:focus,
+.input:focus,
+.select-box:focus,
+.custom-select:focus,
+.select:focus {
+  border-color: var(--color-tertiary);
+  box-shadow: 0 0 0 3px var(--color-tertiary-opaque);
+  outline: none;
+} */
+
+/* Disabled State */
+.input-box:disabled,
+.input-field:disabled,
+.custom-input:disabled,
+.input:disabled,
+.select-box:disabled,
+.custom-select:disabled,
+.select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--color-primary-dark);
+}
+
+/* Invalid / Error State */
+.input-box.is-invalid,
+.input-field.is-invalid,
+.custom-input.is-invalid,
+.input.is-invalid,
+.select-box.is-invalid,
+.select.is-invalid,
+.input-box:invalid:not(:placeholder-shown),
+.input-field:invalid:not(:placeholder-shown) {
+  border-color: var(--color-error, #ef4444);
+  box-shadow: 0 0 0 3px var(--color-error-opaque, rgba(239, 68, 68, 0.2));
+}
+
+/* Input Icon Container */
+.input-icon-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon-wrapper .input-box,
+.input-icon-wrapper .input-field,
+.input-icon-wrapper .input,
+.input-icon-wrapper .select-box,
+.input-icon-wrapper .select {
+  width: 100%;
+}
+
+.input-icon-wrapper.has-icon-left .input-box,
+.input-icon-wrapper.has-icon-left .input-field,
+.input-icon-wrapper.has-icon-left .input,
+.input-icon-wrapper.has-icon-left .select-box,
+.input-icon-wrapper.has-icon-left .select {
+  padding-left: 2.75rem;
+}
+
+.input-icon-wrapper.has-icon-right .input-box,
+.input-icon-wrapper.has-icon-right .input-field,
+.input-icon-wrapper.has-icon-right .input,
+.input-icon-wrapper.has-icon-right .select-box,
+.input-icon-wrapper.has-icon-right .select {
+  padding-right: 2.75rem;
+}
+
+.input-icon-left {
+  position: absolute;
+  left: 0.875rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-secondary-dark);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-icon-right {
+  position: absolute;
+  right: 0.875rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-secondary-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.input-icon-right:hover {
+  color: var(--foreground);
+}
+
+/* Custom Textarea Box styles matching Input Box */
+.textarea-box,
+.custom-textarea {
+  min-height: 5.5rem;
+  height: auto;
+  padding: 0.75rem 1rem;
+  resize: vertical;
 }
